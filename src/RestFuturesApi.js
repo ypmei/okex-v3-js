@@ -133,6 +133,7 @@ export default class RestFuturesApi extends RestCommonApi {
      * @param {*} client_oid String	否	[非必填]由您设置的订单ID来识别您的订单
      * @param {*} instrument_id String	是	合约ID，如BTC-USD-180213
      * @param {*} type String	是	1:开多2:开空3:平多4:平空
+     * @param {*} order_type String	否 0：普通委托（order type不填或填0都是普通委托）1：只做Maker（Post only）2：全部成交或立即取消（FOK）3：立即成交并取消剩余（IOC）4：市价委托
      * @param {*} price Number 是	每张合约的价格
      * @param {*} size String	否	是否以对手价下单(0:不是 1:是)，默认为0，当取值为1时。price字段无效
      * @param {*} match_price String	否	是否以对手价下单(0:不是 1:是)，默认为0，当取值为1时。price字段无效
@@ -140,11 +141,12 @@ export default class RestFuturesApi extends RestCommonApi {
      * @returns
      * @memberof RestFuturesApi
      */
-    async postFuturesOrder(client_oid, instrument_id, type, price, size, match_price, leverage) {
+    async postFuturesOrder(client_oid, instrument_id, type, order_type, price, size, match_price, leverage) {
         return await httpPost(`${this.url}/api/futures/v3/order`, {
             client_oid: client_oid,
             instrument_id: instrument_id,
             type: type,
+            order_type: order_type,
             price: price,
             size: size,
             match_price: match_price,
@@ -202,7 +204,7 @@ export default class RestFuturesApi extends RestCommonApi {
         }, this.accessKey, this.passphrase, this.secretKey)
     }
 
-    
+
 
     /**
      * 获取订单列表
@@ -293,7 +295,7 @@ export default class RestFuturesApi extends RestCommonApi {
         return await httpGet(`${this.url}/api/futures/v3/instruments/${instrument_id}/book`, {
             size:size
         }, this.accessKey, this.passphrase, this.secretKey)
-    } 
+    }
 
 
     /**
@@ -306,10 +308,10 @@ export default class RestFuturesApi extends RestCommonApi {
     async getFuturesInstrumentsTicker(){
         return await httpGet(`${this.url}/api/futures/v3/instruments/ticker`, {
         }, this.accessKey, this.passphrase, this.secretKey)
-    } 
+    }
 
 
-    /** 
+    /**
      * 获取某个ticker信息
      * 获取合约的最新成交价、买一价、卖一价和24小时交易量的快照信息。
      * GET /api/futures/v3/instruments/<instrument_id>/ticker
@@ -321,10 +323,10 @@ export default class RestFuturesApi extends RestCommonApi {
     async getFuturesInstrumentsTickerByInstrument_id(instrument_id){
         return await httpGet(`${this.url}/api/futures/v3/instruments/${instrument_id}/ticker`, {
         }, this.accessKey, this.passphrase, this.secretKey)
-    } 
+    }
 
 
-   
+
      /**
      * 获取成交数据
      * 获取合约最新的2000条成交列表（from的优先级高于to，当同时传from和to参数时，系统返回from参数的请求值）。
@@ -332,7 +334,7 @@ export default class RestFuturesApi extends RestCommonApi {
      * @param {*} instrument_id String	是	合约ID，如BTC-USD-180213
      * @param {*} from Number	否	请求此页码之后的分页内容（举例页码为：1，2，3，4，5。from 4 只返回第5页，to 4只返回第3页）
      * @param {*} to 	Number	否	请求此页码之前的分页内容（举例页码为：1，2，3，4，5。from 4 只返回第5页，to 4只返回第3页）
-     * @param {*} limit 	Number	否	分页返回的结果集数量，默认为100，最大为100，按时间顺序排列，越早下单的在前面    
+     * @param {*} limit 	Number	否	分页返回的结果集数量，默认为100，最大为100，按时间顺序排列，越早下单的在前面
      * @returns
      * @memberof RestFuturesApi
      */
@@ -342,7 +344,7 @@ export default class RestFuturesApi extends RestCommonApi {
             to:to,
             limit:limit
         }, this.accessKey, this.passphrase, this.secretKey)
-    } 
+    }
 
 
     /**
@@ -405,7 +407,7 @@ export default class RestFuturesApi extends RestCommonApi {
     async getFuturesInstrumentsEstimated_price(instrument_id){
         return await httpGet(`${this.url}/api/futures/v3/instruments/${instrument_id}/estimated_price`, {
         }, this.accessKey, this.passphrase, this.secretKey)
-    } 
+    }
 
 
 
@@ -443,7 +445,7 @@ export default class RestFuturesApi extends RestCommonApi {
     /**
      * 获取爆仓单
      * 获取合约爆仓单，此接口为公共接口，不需要身份验证（from的优先级高于to，当同时传from和to参数时，系统返回from参数的请求值）。
-     * GET /api/futures/v3/instruments/<instrument_id>/liquidation  
+     * GET /api/futures/v3/instruments/<instrument_id>/liquidation
      *
      * @param {*} instrument_id 	String	是	合约ID，如BTC-USD-180213
      * @param {*} status String	是	状态(0:最近7天数据（包括第7天） 1:7天前数据)
@@ -464,7 +466,7 @@ export default class RestFuturesApi extends RestCommonApi {
             to:to,
             limit:limit
         }, this.accessKey, this.passphrase, this.secretKey)
-    } 
+    }
 
 
 
@@ -481,7 +483,7 @@ export default class RestFuturesApi extends RestCommonApi {
     async getFuturesInstrumentsHolds(instrument_id){
         return await httpGet(`${this.url}/api/futures/v3/accounts/${instrument_id}/holds`, {
         }, this.accessKey, this.passphrase, this.secretKey)
-    } 
+    }
 
 
 
