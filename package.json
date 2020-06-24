@@ -1,6 +1,6 @@
 {
-  "name": "okex-v3",
-  "version": "0.1.1",
+  "name": "ypmei-ok-api",
+  "version": "0.1.2",
   "description": "okex v3",
   "keyword":[
     "okex",
@@ -28,7 +28,7 @@
   },
   "readme":"使用手册https://github.com/qugang/okex-v3-js/blob/master/readme.md",
   "readmeFilename":"readme.md",
-  "author": "qgass@163.com",
+  "author": "156942742@qq.com",
   "repository": {
     "type": "git",
     "url": "git://github.com/qugang/okex-v3-js.git"
