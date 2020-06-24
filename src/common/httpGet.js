@@ -17,12 +17,11 @@ let loggger = log4js.getLogger()
  */
 export default function httpGet(url, param,accessKey,passphrase,secretKey) {
     let paramKeys = Object.keys(param)
-    for (let index in paramKeys) {
-        if (index === 0) {
-            url += `?${paramKeys[index]}=${param[index]}`
-        }
-        else {
-            url += `&${paramKeys[index]}=${param[index]}`
+    for (var key in param) {
+        if (key === paramKeys[0]) {
+            url += '?' + key + '=' + param[key];
+        } else {
+            url += '&' + key + '=' + param[key];
         }
     }
     const timestamp = new Date().toISOString()
