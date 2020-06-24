@@ -2,7 +2,7 @@
   "name": "ypmei-ok-api",
   "version": "0.1.2",
   "description": "okex v3",
-  "keyword":[
+  "keyword": [
     "okex",
     "okex-v3",
     "v3"
@@ -26,8 +26,8 @@
     "compile": "babel -d lib/ src/",
     "prepublish": "npm run compile"
   },
-  "readme":"使用手册https://github.com/qugang/okex-v3-js/blob/master/readme.md",
-  "readmeFilename":"readme.md",
+  "readme": "使用手册https://github.com/qugang/okex-v3-js/blob/master/readme.md",
+  "readmeFilename": "readme.md",
   "author": "156942742@qq.com",
   "repository": {
     "type": "git",
